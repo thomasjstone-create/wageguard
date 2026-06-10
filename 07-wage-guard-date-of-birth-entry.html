@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wage Guard - Date of Birth</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, .font-display {
+      font-family: 'Barlow', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-gradient {
+      background: linear-gradient(135deg, #FB923C 0%, #EA580C 100%);
+    }
+
+    .custom-shadow {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    }
+
+    select:focus {
+      border-color: #F97316 !important;
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
+    }
+  </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body>
+  <div class="w-full h-screen flex flex-col bg-slate-50">
+    <!-- Persistent Header Component -->
+    <!-- component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+<div v-scope="{ ...{&quot;logoHref&quot;:&quot;#&quot;,&quot;logoImageUrl&quot;:&quot;https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/4233cb39-cd4e-4c57-af4c-3d3c640d60f3/1779442577529-fb707ca3/istockphoto-2067327657-1024x1024.jpg&quot;,&quot;logoAlt&quot;:&quot;Wage Guard Logo&quot;}, $emit() {} }">
+<header class="shrink-0 pt-14 px-6 pb-4 bg-white border-b border-slate-100 flex items-center justify-start">
+  <a :href="logoHref" class="flex items-center gap-2 no-underline">
+    <img :src="logoImageUrl" :alt="logoAlt" class="w-8 h-8 rounded-lg object-cover shadow-lg">
+    <span class="text-xl font-extrabold text-black" style="font-family: 'Barlow', sans-serif; font-weight: 700; letter-spacing: -0.02em;">Wage Guard</span>
+  </a>
+</header>
+</div>
+<!-- /component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+
+    <main class="flex-1 overflow-y-auto px-6 py-8">
+      <!-- Progress Section -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <div class="flex gap-1.5">
+              <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+              <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+              <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+              <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+              <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+              <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+            </div>
+            <span class="inline-flex items-center gap-1.5 bg-orange-100 text-black px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
+              Step 4b of 6
+            </span>
+          </div>
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+            ~67% Complete
+          </span>
+        </div>
+      </div>
+
+      <!-- Heading -->
+      <div class="mb-10">
+        <h1 class="text-3xl font-bold text-slate-900 leading-tight mb-3">
+          What's your <span class="text-orange-500">date of birth?</span>
+        </h1>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Your date of birth helps us calculate accurate protection quotes and ensure policy terms match your specific career stage.
+        </p>
+      </div>
+
+      <!-- Information Note -->
+      <div class="p-4 bg-orange-50 rounded-2xl border border-orange-200 flex gap-3 shadow-sm">
+        <iconify-icon icon="lucide:info" class="text-orange-600 text-xl shrink-0 mt-0.5"></iconify-icon>
+        <p class="text-xs text-black leading-relaxed">
+          We use your age to secure the most competitive premium range from our underwriting partners.
+        </p>
+      </div>
+
+      <!-- Date of Birth Selection -->
+      <div class="mt-10 space-y-6">
+        <div class="grid grid-cols-3 gap-3">
+          <!-- Day -->
+          <div class="relative">
+            <select name="dobDay" class="w-full h-16 bg-white border-2 border-orange-500 rounded-2xl px-4 font-display font-bold text-lg text-black focus:outline-none transition-all appearance-none cursor-pointer shadow-sm active:bg-orange-50">
+              <option value="" disabled selected>Day</option>
+              <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-black">
+              <iconify-icon icon="lucide:chevron-down" class="text-xl"></iconify-icon>
+            </div>
+          </div>
+          <!-- Month -->
+          <div class="relative">
+            <select name="dobMonth" class="w-full h-16 bg-white border-2 border-orange-500 rounded-2xl px-4 font-display font-bold text-lg text-black focus:outline-none transition-all appearance-none cursor-pointer shadow-sm active:bg-orange-50">
+              <option value="" disabled selected>Month</option>
+              <option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-black">
+              <iconify-icon icon="lucide:chevron-down" class="text-xl"></iconify-icon>
+            </div>
+          </div>
+          <!-- Year -->
+          <div class="relative">
+            <select name="dobYear" class="w-full h-16 bg-white border-2 border-orange-500 rounded-2xl px-4 font-display font-bold text-lg text-black focus:outline-none transition-all appearance-none cursor-pointer shadow-sm active:bg-orange-50">
+              <option value="" disabled selected>Year</option>
+              <option value="2006">2006</option><option value="2005">2005</option><option value="2004">2004</option><option value="2003">2003</option><option value="2002">2002</option><option value="2001">2001</option><option value="2000">2000</option><option value="1999">1999</option><option value="1998">1998</option><option value="1997">1997</option><option value="1996">1996</option><option value="1995">1995</option><option value="1994">1994</option><option value="1993">1993</option><option value="1992">1992</option><option value="1991">1991</option><option value="1990">1990</option><option value="1989">1989</option><option value="1988">1988</option><option value="1987">1987</option><option value="1986">1986</option><option value="1985">1985</option><option value="1984">1984</option><option value="1983">1983</option><option value="1982">1982</option><option value="1981">1981</option><option value="1980">1980</option><option value="1979">1979</option><option value="1978">1978</option><option value="1977">1977</option><option value="1976">1976</option><option value="1975">1975</option><option value="1974">1974</option><option value="1973">1973</option><option value="1972">1972</option><option value="1971">1971</option><option value="1970">1970</option><option value="1969">1969</option><option value="1968">1968</option><option value="1967">1967</option><option value="1966">1966</option><option value="1965">1965</option><option value="1964">1964</option><option value="1963">1963</option><option value="1962">1962</option><option value="1961">1961</option><option value="1960">1960</option><option value="1959">1959</option><option value="1958">1958</option><option value="1957">1957</option><option value="1956">1956</option><option value="1955">1955</option><option value="1954">1954</option><option value="1953">1953</option><option value="1952">1952</option><option value="1951">1951</option><option value="1950">1950</option><option value="1949">1949</option><option value="1948">1948</option><option value="1947">1947</option><option value="1946">1946</option><option value="1945">1945</option><option value="1944">1944</option>
+            </select>
+            <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-black">
+              <iconify-icon icon="lucide:chevron-down" class="text-xl"></iconify-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Continue Button -->
+        <a href="06-wage-guard-fixed-brand-logo-consistency.html" id="cta-continue-dob" class="w-full h-14 brand-gradient rounded-2xl flex items-center justify-center gap-2 text-white font-bold text-lg shadow-xl shadow-orange-900/10 active:scale-[0.98] transition-transform">
+          Continue
+          <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+        </a>
+      </div>
+    </main>
+
+    <!-- Simplified Navigation Footer -->
+    <footer class="shrink-0 h-10 bg-white border-t border-slate-100"></footer>
+  </div>
+  <script src="wageguard.js" defer></script>
+</body>
+</html>

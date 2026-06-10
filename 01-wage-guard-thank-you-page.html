@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wage Guard - Thank You</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&display=swap');
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, .font-display {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    .orange-gradient {
+      background: linear-gradient(135deg, #F97316 0%, #1E293B 100%);
+    }
+  </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body>
+  <div class="w-full h-screen flex flex-col bg-slate-50">
+    <!-- Persistent Header Component -->
+    <!-- component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+<div v-scope="{ ...{&quot;logoHref&quot;:&quot;#&quot;,&quot;logoImageUrl&quot;:&quot;https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/4233cb39-cd4e-4c57-af4c-3d3c640d60f3/1779442770371-15642c31/Frame_87.png&quot;,&quot;logoAlt&quot;:&quot;Wage Guard Logo&quot;}, $emit() {} }">
+<header class="shrink-0 pt-14 px-6 pb-4 bg-white border-b border-slate-100 flex items-center justify-start">
+  <a :href="logoHref" class="flex items-center gap-2 no-underline">
+    <img :src="logoImageUrl" :alt="logoAlt" class="w-8 h-8 rounded-lg object-cover shadow-lg">
+    <span class="text-xl font-extrabold text-black" style="font-family: 'Barlow', sans-serif; font-weight: 700; letter-spacing: -0.02em;">Wage Guard</span>
+  </a>
+</header>
+</div>
+<!-- /component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+
+    <main class="flex-1 flex flex-col items-center justify-center px-8 text-center overflow-y-auto">
+      <!-- Success Illustration -->
+      <div class="mb-8 relative">
+        <div class="w-24 h-24 bg-orange-100 rounded-full flex items-center justify-center relative z-10 mx-auto">
+          <iconify-icon icon="lucide:check-circle-2" class="text-6xl text-orange-500"></iconify-icon>
+        </div>
+        <div class="absolute inset-0 bg-orange-500/20 rounded-full blur-2xl"></div>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="text-4xl font-extrabold text-slate-900 mb-4">Thank You!</h1>
+      
+      <!-- Message -->
+      <p class="text-lg text-slate-600 mb-10 leading-relaxed">
+        Your request for income protection has been submitted successfully. We've received your details and are matching them with our best-value providers.
+      </p>
+
+      <!-- Next Steps Card -->
+      <div class="w-full max-w-sm bg-white rounded-3xl p-6 border border-slate-100 shadow-sm text-left">
+        <h2 class="text-sm font-bold text-slate-900 uppercase tracking-widest mb-4">What Happens Next?</h2>
+        
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <div class="shrink-0 w-6 h-6 bg-slate-900 rounded-full flex items-center justify-center text-[10px] text-orange-500 font-bold">
+              1
+            </div>
+            <p class="text-slate-600 text-sm">
+              A specialist advisor will review your application within <span class="font-bold text-slate-900">24 hours</span>.
+            </p>
+          </li>
+          <li class="flex items-start gap-3">
+            <div class="shrink-0 w-6 h-6 bg-slate-900 rounded-full flex items-center justify-center text-[10px] text-orange-500 font-bold">
+              2
+            </div>
+            <p class="text-slate-600 text-sm">
+              We'll call you to confirm a few details and provide your personalized quote.
+            </p>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Trust Signal -->
+      <div class="mt-12 flex items-center gap-2 opacity-60">
+        <iconify-icon icon="lucide:shield-check" class="text-slate-400"></iconify-icon>
+        <span class="text-xs font-medium text-slate-500 uppercase tracking-widest">Secure Submission</span>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thank You | Wage Guard</title>
+  <meta name="description" content="Thank you for requesting a quote from Wage Guard.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Barlow', sans-serif; background-color: #F8FAFC; color: #0F172A; margin: 0; }
+  </style>
+</head>
+<body>
+  <div id="cookie-consent-banner" class="fixed inset-x-0 bottom-0 z-50 hidden bg-slate-950/95 text-white shadow-2xl">
+    <div class="mx-auto max-w-7xl px-6 py-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div class="max-w-4xl text-sm leading-6 text-slate-200">
+        We use cookies to improve your experience and show relevant content. By clicking Accept, you agree to our <a href="cookie-policy.html" class="underline text-orange-400">Cookie Policy</a> and <a href="privacy-policy.html" class="underline text-orange-400">Privacy Policy</a>.
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <button id="cookie-consent-manage" type="button" class="rounded-full border border-white/20 px-5 py-3 text-sm text-white transition hover:border-orange-400 hover:text-orange-400">Manage preferences</button>
+        <button id="cookie-consent-accept" type="button" class="rounded-full bg-orange-500 px-6 py-3 text-sm font-semibold text-slate-950 transition hover:bg-orange-400">Accept cookies</button>
+      </div>
+    </div>
+  </div>
+  <main class="min-h-screen bg-white flex items-center justify-center py-20 px-6">
+    <div class="max-w-3xl rounded-[40px] border border-slate-200 bg-slate-50 p-12 text-center shadow-2xl">
+      <div class="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-full bg-orange-500 text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="h-10 w-10"><path fill="currentColor" d="M9 16.172l-3.586-3.586L4 14l5 5 12-12-1.414-1.414z"/></svg>
+      </div>
+      <h1 class="text-4xl font-black text-slate-900 mb-4">Thank you!</h1>
+      <p class="text-base leading-8 text-slate-600 mb-8">We have received your quote request. A specialist will be in touch soon to discuss the right income protection options for your trade.</p>
+      <a href="index.html" class="inline-flex items-center justify-center rounded-3xl bg-orange-600 px-8 py-4 text-base font-bold text-slate-900 transition hover:bg-orange-500">Return to Wage Guard</a>
+    </div>
+  </main>
+  <script src="wageguard.js" defer></script>
+</body>
+</html>

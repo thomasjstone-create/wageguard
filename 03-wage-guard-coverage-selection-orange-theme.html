@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wage Guard - Income Information</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, .font-display {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .black-gradient {
+      background: linear-gradient(135deg, #1f2937 0%, #000000 100%);
+    }
+
+    .custom-shadow {
+      box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.2), 0 8px 10px -6px rgba(249, 115, 22, 0.1);
+    }
+
+    /* Hide default appearance but keep functional */
+    .custom-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1.25rem;
+    }
+  </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body>
+  <div class="w-full h-screen flex flex-col bg-slate-50">
+    <!-- Persistent Header Component -->
+    <!-- component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+<div v-scope="{ ...{&quot;logoHref&quot;:&quot;#&quot;,&quot;logoImageUrl&quot;:&quot;https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/4233cb39-cd4e-4c57-af4c-3d3c640d60f3/1779442770371-15642c31/Frame_87.png&quot;,&quot;logoAlt&quot;:&quot;Wage Guard Logo&quot;}, $emit() {} }">
+<header class="shrink-0 pt-14 px-6 pb-4 bg-white border-b border-slate-100 flex items-center justify-start">
+  <a :href="logoHref" class="flex items-center gap-2 no-underline">
+    <img :src="logoImageUrl" :alt="logoAlt" class="w-8 h-8 rounded-lg object-cover shadow-lg">
+    <span class="text-xl font-extrabold text-black" style="font-family: 'Barlow', sans-serif; font-weight: 700; letter-spacing: -0.02em;">Wage Guard</span>
+  </a>
+</header>
+</div>
+<!-- /component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+
+    <main class="flex-1 overflow-y-auto px-6">
+      <!-- Progress Bar -->
+      <div class="mt-6 mb-8">
+        <div class="flex items-center gap-2">
+          <div class="flex gap-1.5">
+            <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+            <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+            <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+            <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+            <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+            <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+          </div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Step 2 of 6</span>
+        </div>
+      </div>
+
+      <!-- Form Header -->
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-slate-900 leading-tight mb-3">
+          How much cover do you <br/><span class="text-orange-600">need?</span>
+        </h1>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Choose the monthly income protection amount you'd like to receive if you're unable to work.
+        </p>
+      </div>
+
+      <!-- Form Inputs -->
+      <div class="space-y-6">
+        <!-- Coverage Range Cards -->
+        <div class="grid grid-cols-2 gap-4">
+          <a href="04-wage-guard-smoking-status-updated-logo.html" id="coverage-0-1k-link" class="group relative flex flex-col items-center justify-center p-6 min-h-[140px] bg-white border-2 border-orange-500 rounded-3xl cursor-pointer transition-all hover:bg-orange-500 hover:text-black custom-shadow">
+            <span class="text-xl font-display font-extrabold">£0 - £1k</span>
+            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+              <iconify-icon icon="lucide:check-circle-2" class="text-xl text-black"></iconify-icon>
+            </div>
+          </a>
+          <a href="04-wage-guard-smoking-status-updated-logo.html" id="coverage-1k-2k-link" class="group relative flex flex-col items-center justify-center p-6 min-h-[140px] bg-orange-500 border-2 border-orange-500 rounded-3xl cursor-pointer transition-all text-black custom-shadow hover:bg-orange-600">
+            <span class="text-xl font-display font-extrabold">£1k - £2k</span>
+            <div class="absolute top-3 right-3 opacity-100 transition-opacity">
+              <iconify-icon icon="lucide:check-circle-2" class="text-xl text-black"></iconify-icon>
+            </div>
+          </a>
+          <a href="04-wage-guard-smoking-status-updated-logo.html" id="coverage-2k-3k-link" class="group relative flex flex-col items-center justify-center p-6 min-h-[140px] bg-white border-2 border-orange-500 rounded-3xl cursor-pointer transition-all hover:bg-orange-500 hover:text-black custom-shadow">
+            <span class="text-xl font-display font-extrabold">£2k - £3k</span>
+            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+              <iconify-icon icon="lucide:check-circle-2" class="text-xl text-black"></iconify-icon>
+            </div>
+          </a>
+          <a href="04-wage-guard-smoking-status-updated-logo.html" id="coverage-3kplus-link" class="group relative flex flex-col items-center justify-center p-6 min-h-[140px] bg-white border-2 border-orange-500 rounded-3xl cursor-pointer transition-all hover:bg-orange-500 hover:text-black custom-shadow">
+            <span class="text-xl font-display font-extrabold">£3k +</span>
+            <div class="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
+              <iconify-icon icon="lucide:check-circle-2" class="text-xl text-black"></iconify-icon>
+            </div>
+          </a>
+        </div>
+
+        <!-- Data Reassurance -->
+        <div class="flex items-start gap-3 p-4 bg-slate-100/50 rounded-2xl mt-4 border border-slate-200/50">
+          <iconify-icon icon="lucide:shield-lock" class="text-slate-400 text-xl shrink-0 mt-0.5"></iconify-icon>
+          <p class="text-xs text-slate-500 leading-normal">
+            We use this information solely to generate your quote. Your data is encrypted and never sold to third parties.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Navigation Footer -->
+    <footer class="shrink-0 h-10 bg-white border-t border-slate-100"></footer>
+  </div>
+  <script src="wageguard.js" defer></script>
+</body>
+</html>

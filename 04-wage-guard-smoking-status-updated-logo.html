@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wage Guard - Step 3: Smoking Status</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;700;800&display=swap');
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, .font-display {
+      font-family: 'Barlow', sans-serif;
+      letter-spacing: -0.02em;
+    }
+
+    .orange-gradient {
+      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    }
+
+    .custom-shadow {
+      box-shadow: 0 10px 25px -5px rgba(249, 115, 22, 0.1), 0 8px 10px -6px rgba(249, 115, 22, 0.1);
+    }
+
+    label:has(input:checked) {
+      background-color: #F97316 !important;
+      color: #ffffff !important;
+      border-color: #F97316 !important;
+    }
+
+    label:has(input:checked) .icon-box {
+      background-color: rgba(0, 0, 0, 0.05) !important;
+      color: #0f172a !important;
+    }
+  </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body>
+  <div class="w-full h-screen flex flex-col bg-slate-50">
+    <!-- WageGuardHeader Component Instance -->
+    <!-- component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+<div v-scope="{ ...{&quot;logoHref&quot;:&quot;#&quot;,&quot;logoImageUrl&quot;:&quot;https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/4233cb39-cd4e-4c57-af4c-3d3c640d60f3/1779442770371-15642c31/Frame_87.png&quot;,&quot;logoAlt&quot;:&quot;Wage Guard Logo&quot;}, $emit() {} }">
+<header class="shrink-0 pt-14 px-6 pb-4 bg-white border-b border-slate-100 flex items-center justify-start">
+  <a :href="logoHref" class="flex items-center gap-2 no-underline">
+    <img :src="logoImageUrl" :alt="logoAlt" class="w-8 h-8 rounded-lg object-cover shadow-lg">
+    <span class="text-xl font-extrabold text-black" style="font-family: 'Barlow', sans-serif; font-weight: 700; letter-spacing: -0.02em;">Wage Guard</span>
+  </a>
+</header>
+</div>
+<!-- /component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+
+    <main class="flex-1 overflow-y-auto px-6 py-8">
+      <!-- Progress & Indicator -->
+      <div class="flex items-center gap-2 mb-8">
+        <div class="flex gap-1.5">
+          <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+          <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+          <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+          <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+          <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+          <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+        </div>
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Step 3 of 6</span>
+      </div>
+      
+      <!-- Header Text -->
+      <div class="mb-10">
+        <h1 class="text-3xl font-extrabold text-slate-900 mb-3 font-display">
+          Do you <span class="text-orange-500">smoke?</span>
+        </h1>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          This helps us assess your risk profile accurately and secure the most competitive rates for your age group.
+        </p>
+      </div>
+
+      <!-- Selection Section -->
+      <div class="space-y-4">
+        <a href="05-wage-guard-health-history-updated-logo-theme.html" id="choice-no-smoke" class="relative flex items-center p-6 min-h-[100px] bg-white border-2 border-slate-100 rounded-3xl cursor-pointer transition-all hover:border-orange-500 hover:bg-orange-50/50 custom-shadow group">
+          <div class="flex items-center gap-4">
+            <div class="icon-box w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600 transition-colors group-hover:bg-orange-500 group-hover:text-slate-900">
+              <iconify-icon icon="lucide:wind" class="text-2xl"></iconify-icon>
+            </div>
+            <div>
+              <p class="text-xl font-display font-extrabold text-slate-900">No, I don't smoke</p>
+              <p class="text-xs text-slate-500">Smoke-free for 12+ months</p>
+            </div>
+          </div>
+          <div class="absolute top-4 right-4 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity">
+            <iconify-icon icon="lucide:arrow-right" class="text-2xl"></iconify-icon>
+          </div>
+        </a>
+
+        <a href="05-wage-guard-health-history-updated-logo-theme.html" id="choice-yes-smoke" class="relative flex items-center p-6 min-h-[100px] bg-white border-2 border-slate-100 rounded-3xl cursor-pointer transition-all hover:border-orange-500 hover:bg-orange-50/50 custom-shadow group">
+          <div class="flex items-center gap-4">
+            <div class="icon-box w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600 transition-colors group-hover:bg-orange-500 group-hover:text-slate-900">
+              <iconify-icon icon="lucide:flame" class="text-2xl"></iconify-icon>
+            </div>
+            <div>
+              <p class="text-xl font-display font-extrabold text-slate-900">Yes, I smoke</p>
+              <p class="text-xs text-slate-500">Includes vaping & nicotine products</p>
+            </div>
+          </div>
+          <div class="absolute top-4 right-4 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity">
+            <iconify-icon icon="lucide:arrow-right" class="text-2xl"></iconify-icon>
+          </div>
+        </a>
+      </div>
+
+      <!-- Trust Note -->
+      <div class="mt-10 flex items-start gap-3 p-4 bg-slate-100/50 rounded-2xl border border-slate-200/50">
+        <iconify-icon icon="lucide:shield-check" class="text-slate-400 text-xl shrink-0 mt-0.5"></iconify-icon>
+        <p class="text-xs text-slate-500 leading-normal">
+          Your honesty ensures that any future claims are processed without delay. All information is kept strictly confidential.
+        </p>
+      </div>
+    </main>
+  </div>
+  <script src="wageguard.js" defer></script>
+</body>
+</html>

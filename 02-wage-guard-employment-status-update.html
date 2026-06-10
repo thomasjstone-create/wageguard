@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employment Details - Wage Guard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    body {
+      font-family: 'Barlow', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1, h2, .font-display {
+      font-family: 'Barlow', sans-serif;
+      letter-spacing: -0.02em;
+    }
+    .teal-gradient {
+      background: linear-gradient(135deg, #F97316 0%, #0F172A 100%);
+    }
+    .custom-shadow {
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.1);
+    }
+  </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body>
+  <div class="w-full h-screen flex flex-col bg-white">
+    <!-- component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+<div v-scope="{ ...{&quot;logoHref&quot;:&quot;#&quot;,&quot;logoImageUrl&quot;:&quot;https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/4233cb39-cd4e-4c57-af4c-3d3c640d60f3/1779442770371-15642c31/Frame_87.png&quot;,&quot;logoAlt&quot;:&quot;Wage Guard Logo&quot;}, $emit() {} }">
+<header class="shrink-0 pt-14 px-6 pb-4 bg-white border-b border-slate-100 flex items-center justify-start">
+  <a :href="logoHref" class="flex items-center gap-2 no-underline">
+    <img :src="logoImageUrl" :alt="logoAlt" class="w-8 h-8 rounded-lg object-cover shadow-lg">
+    <span class="text-xl font-extrabold text-black" style="font-family: 'Barlow', sans-serif; font-weight: 700; letter-spacing: -0.02em;">Wage Guard</span>
+  </a>
+</header>
+</div>
+<!-- /component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+    
+    <main class="flex-1 overflow-y-auto">
+      <section class="px-6 py-8">
+        <div class="flex items-center gap-2 mb-4">
+          <div class="flex gap-1.5">
+            <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+            <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+            <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+            <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+            <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+            <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+          </div>
+          <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">Step 1 of 6</span>
+        </div>
+        
+        <h1 class="text-3xl font-bold text-slate-900 leading-tight mb-3">Tell us about your <span class="text-orange-500">Work</span></h1>
+        <p class="text-slate-700 leading-relaxed mb-8">Your occupation helps us calculate the exact level of risk and ensure your cover is tailored to your specific role.</p>
+
+        <div class="space-y-6">
+          <div class="space-y-3">
+            <label class="text-sm font-bold text-slate-900 ml-1 tracking-tight">Employment Status</label>
+            <div class="grid grid-cols-1 gap-4">
+              <a href="03-wage-guard-coverage-selection-orange-theme.html" id="nav-employed-link" class="relative flex items-center p-6 min-h-[100px] bg-white border-2 border-slate-100 rounded-3xl cursor-pointer transition-all hover:border-orange-500 hover:bg-orange-50/50 custom-shadow group">
+                <div class="flex items-center gap-4">
+                  <div class="icon-box w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600 transition-colors group-hover:bg-orange-500 group-hover:text-slate-900">
+                    <iconify-icon icon="lucide:building-2" class="text-2xl"></iconify-icon>
+                  </div>
+                  <div>
+                    <p class="text-xl font-display font-extrabold text-slate-900">Employed Full-Time</p>
+                    <p class="text-xs text-slate-500">PAYE with a contract</p>
+                  </div>
+                </div>
+                <div class="absolute top-4 right-4 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <iconify-icon icon="lucide:arrow-right" class="text-2xl"></iconify-icon>
+                </div>
+              </a>
+              
+              <a href="03-wage-guard-coverage-selection-orange-theme.html" id="nav-self-employed-link" class="relative flex items-center p-6 min-h-[100px] bg-white border-2 border-slate-100 rounded-3xl cursor-pointer transition-all hover:border-orange-500 hover:bg-orange-50/50 custom-shadow group">
+                <div class="flex items-center gap-4">
+                  <div class="icon-box w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600 transition-colors group-hover:bg-orange-500 group-hover:text-slate-900">
+                    <iconify-icon icon="lucide:user" class="text-2xl"></iconify-icon>
+                  </div>
+                  <div>
+                    <p class="text-xl font-display font-extrabold text-slate-900">Self-Employed / Sole Trader</p>
+                    <p class="text-xs text-slate-500">Managing your own business</p>
+                  </div>
+                </div>
+                <div class="absolute top-4 right-4 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <iconify-icon icon="lucide:arrow-right" class="text-2xl"></iconify-icon>
+                </div>
+              </a>
+            </div>
+          </div>
+          
+          <div class="bg-blue-50 p-4 rounded-2xl flex gap-3 border border-blue-100">
+            <iconify-icon icon="lucide:info" class="text-blue-500 text-xl shrink-0 mt-0.5"></iconify-icon>
+            <p class="text-xs text-blue-800 leading-relaxed">We use this to verify which illnesses or injuries are most relevant to your specific career path.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="wageguard.js" defer></script>
+</body>
+</html>

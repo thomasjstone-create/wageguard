@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wage Guard - Personal Details (Orange Theme)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1, h2, .font-display {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .orange-gradient {
+      background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+    }
+
+    .custom-shadow {
+      box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.15), 0 8px 10px -6px rgba(234, 88, 12, 0.15);
+    }
+
+    input:focus {
+      border-color: #F97316 !important;
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
+    }
+  </style>
+  <style>sd-component { display: block; }</style>
+  <script src="https://cdn.jsdelivr.net/npm/petite-vue@0.4.1/dist/petite-vue.iife.js" defer init></script>
+</head>
+<body>
+  <div class="w-full h-screen flex flex-col bg-slate-50">
+    <!-- Persistent Header Component -->
+    <!-- component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+<div v-scope="{ ...{&quot;logoHref&quot;:&quot;#&quot;,&quot;logoImageUrl&quot;:&quot;https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/4233cb39-cd4e-4c57-af4c-3d3c640d60f3/1779442770371-15642c31/Frame_87.png&quot;,&quot;logoAlt&quot;:&quot;Wage Guard Logo&quot;}, $emit() {} }">
+<header class="shrink-0 pt-14 px-6 pb-4 bg-white border-b border-slate-100 flex items-center justify-start">
+  <a :href="logoHref" class="flex items-center gap-2 no-underline">
+    <img :src="logoImageUrl" :alt="logoAlt" class="w-8 h-8 rounded-lg object-cover shadow-lg">
+    <span class="text-xl font-extrabold text-black" style="font-family: 'Barlow', sans-serif; font-weight: 700; letter-spacing: -0.02em;">Wage Guard</span>
+  </a>
+</header>
+</div>
+<!-- /component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
+
+    <main class="flex-1 overflow-y-auto px-6 py-8">
+      <!-- Progress Section -->
+      <div class="mb-8">
+        <div class="flex items-center justify-between mb-2">
+          <span class="inline-flex items-center gap-1.5 bg-orange-500/20 text-slate-900 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider">
+            Step 5 of 6
+          </span>
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+            83% Complete
+          </span>
+        </div>
+        <div class="flex gap-1.5">
+          <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+          <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+          <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+          <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+          <div class="h-1.5 w-6 rounded-full bg-orange-500"></div>
+          <div class="h-1.5 w-6 rounded-full bg-slate-200"></div>
+        </div>
+      </div>
+
+      <!-- Heading -->
+      <div class="mb-8">
+        <h1 class="text-3xl font-bold text-slate-900 leading-tight mb-3">
+          Let's confirm your <span class="text-orange-500">details</span>
+        </h1>
+        <p class="text-slate-500 text-sm leading-relaxed">
+          Just a few final details to complete your quote.
+        </p>
+      </div>
+
+      <!-- Form Fields -->
+      <div class="space-y-5">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1.5">
+            <label class="text-sm font-bold text-slate-700 ml-1">First Name</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                <iconify-icon icon="lucide:user" class="text-xl"></iconify-icon>
+              </div>
+              <input type="text" name="firstName" placeholder="First Name" class="w-full h-14 pl-12 pr-4 bg-white border border-slate-200 rounded-2xl outline-none transition-all text-slate-900 placeholder:text-slate-300">
+            </div>
+          </div>
+          <div class="space-y-1.5">
+            <label class="text-sm font-bold text-slate-700 ml-1">Last Name</label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+                <iconify-icon icon="lucide:user" class="text-xl"></iconify-icon>
+              </div>
+              <input type="text" name="lastName" placeholder="Last Name" class="w-full h-14 pl-12 pr-4 bg-white border border-slate-200 rounded-2xl outline-none transition-all text-slate-900 placeholder:text-slate-300">
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="text-sm font-bold text-slate-700 ml-1">Email Address</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+              <iconify-icon icon="lucide:mail" class="text-xl"></iconify-icon>
+            </div>
+            <input type="email" name="email" placeholder="alex@example.com" class="w-full h-14 pl-12 pr-4 bg-white border border-slate-200 rounded-2xl outline-none transition-all text-slate-900 placeholder:text-slate-300">
+          </div>
+        </div>
+
+        <div class="space-y-1.5">
+          <label class="text-sm font-bold text-slate-700 ml-1">Phone Number</label>
+          <div class="relative">
+            <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
+              <iconify-icon icon="lucide:phone" class="text-xl"></iconify-icon>
+            </div>
+            <input type="tel" name="phone" placeholder="Phone: 07700 900000" class="w-full h-14 pl-12 pr-4 bg-white border border-slate-200 rounded-2xl outline-none transition-all text-slate-900 placeholder:text-slate-300">
+          </div>
+        </div>
+      </div>
+
+      <!-- Reassurance Section -->
+      <div class="mt-8 bg-white border border-slate-100 rounded-2xl p-4 flex items-start gap-3 shadow-sm">
+        <div class="shrink-0 w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-slate-900">
+          <iconify-icon icon="lucide:shield-check" class="text-xl"></iconify-icon>
+        </div>
+        <p class="text-xs text-slate-600 leading-snug">
+          <span class="font-bold text-slate-900">Secure Application.</span> Your data is encrypted and never shared without permission.
+        </p>
+      </div>
+    </main>
+
+    <!-- Navigation Footer -->
+    <footer class="shrink-0 pb-[34px] px-6 bg-white border-t border-slate-100 shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+      <div class="pt-6">
+        <a href="thank-you.html" id="nav-finish-quote" class="w-full h-14 orange-gradient rounded-2xl flex items-center justify-center gap-2 text-white font-bold text-lg shadow-xl shadow-orange-900/10 active:scale-[0.98] transition-transform">
+          Continue
+          <iconify-icon icon="lucide:arrow-right"></iconify-icon>
+        </a>
+        <p id="final-submit-status" class="text-sm text-slate-600 mt-4"></p>
+      </div>
+      <p class="text-[10px] text-center text-slate-400 mt-4 px-2">
+        By submitting this form and based on your requirements you agree that an FCA authorised company can contact you by phone, email or electronic messaging to provide the comparison service and in accordance with our <a href="privacy-policy.html" class="text-orange-500 hover:text-orange-400">Privacy Policy</a>.
+      </p>
+    </footer>
+  </div>
+  <script src="wageguard.js" defer></script>
+</body>
+</html>

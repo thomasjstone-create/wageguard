@@ -30,7 +30,7 @@
 <body>
   <div class="w-full h-screen flex flex-col bg-white">
     <!-- component: WageGuardHeader (757014f3-75f1-42fe-b186-9d905fa2a6d0) -->
-<div v-scope="{ ...{&quot;logoHref&quot;:&quot;#&quot;,&quot;logoImageUrl&quot;:&quot;https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/4233cb39-cd4e-4c57-af4c-3d3c640d60f3/1779442770371-15642c31/Frame_87.png&quot;,&quot;logoAlt&quot;:&quot;Wage Guard Logo&quot;}, $emit() {} }">
+<div v-scope="{ ...{&quot;logoHref&quot;:&quot;index.html&quot;,&quot;logoImageUrl&quot;:&quot;https://vgbujcuwptvheqijyjbe.supabase.co/storage/v1/object/public/hmac-uploads/uploads/4233cb39-cd4e-4c57-af4c-3d3c640d60f3/1779442770371-15642c31/Frame_87.png&quot;,&quot;logoAlt&quot;:&quot;Wage Guard Logo&quot;}, $emit() {} }">
 <header class="shrink-0 pt-14 px-6 pb-4 bg-white border-b border-slate-100 flex items-center justify-start">
   <a :href="logoHref" class="flex items-center gap-2 no-underline">
     <img :src="logoImageUrl" :alt="logoAlt" class="w-8 h-8 rounded-lg object-cover shadow-lg">
@@ -60,35 +60,23 @@
         <div class="space-y-6">
           <div class="space-y-3">
             <label class="text-sm font-bold text-slate-900 ml-1 tracking-tight">Employment Status</label>
-            <div class="grid grid-cols-1 gap-4">
-              <a href="03-wage-guard-coverage-selection-orange-theme.html" id="nav-employed-link" class="relative flex items-center p-6 min-h-[100px] bg-white border-2 border-slate-100 rounded-3xl cursor-pointer transition-all hover:border-orange-500 hover:bg-orange-50/50 custom-shadow group">
-                <div class="flex items-center gap-4">
-                  <div class="icon-box w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600 transition-colors group-hover:bg-orange-500 group-hover:text-slate-900">
-                    <iconify-icon icon="lucide:building-2" class="text-2xl"></iconify-icon>
-                  </div>
-                  <div>
-                    <p class="text-xl font-display font-extrabold text-slate-900">Employed Full-Time</p>
-                    <p class="text-xs text-slate-500">PAYE with a contract</p>
-                  </div>
+            <div class="grid grid-cols-1 gap-3">
+              <a href="03-wage-guard-coverage-selection-orange-theme.html" id="nav-employed-link" class="relative flex items-center p-5 bg-white border-2 border-slate-100 rounded-2xl cursor-pointer transition-all hover:border-orange-500 hover:bg-orange-50/50 group">
+                <iconify-icon icon="lucide:building-2" class="text-2xl text-slate-400 mr-4 group-hover:text-orange-500 transition-colors"></iconify-icon>
+                <div class="flex-1">
+                  <p class="font-bold text-slate-900 group-hover:text-black">Employed Full-Time</p>
+                  <p class="text-xs text-slate-500">PAYE with a contract</p>
                 </div>
-                <div class="absolute top-4 right-4 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <iconify-icon icon="lucide:arrow-right" class="text-2xl"></iconify-icon>
-                </div>
+                <iconify-icon icon="lucide:chevron-right" class="text-slate-300 group-hover:text-orange-500 transition-all transform group-hover:translate-x-1"></iconify-icon>
               </a>
               
-              <a href="03-wage-guard-coverage-selection-orange-theme.html" id="nav-self-employed-link" class="relative flex items-center p-6 min-h-[100px] bg-white border-2 border-slate-100 rounded-3xl cursor-pointer transition-all hover:border-orange-500 hover:bg-orange-50/50 custom-shadow group">
-                <div class="flex items-center gap-4">
-                  <div class="icon-box w-12 h-12 rounded-2xl bg-orange-50 flex items-center justify-center text-orange-600 transition-colors group-hover:bg-orange-500 group-hover:text-slate-900">
-                    <iconify-icon icon="lucide:user" class="text-2xl"></iconify-icon>
-                  </div>
-                  <div>
-                    <p class="text-xl font-display font-extrabold text-slate-900">Self-Employed / Sole Trader</p>
-                    <p class="text-xs text-slate-500">Managing your own business</p>
-                  </div>
+              <a href="03-wage-guard-coverage-selection-orange-theme.html" id="nav-self-employed-link" class="relative flex items-center p-5 bg-white border-2 border-slate-100 rounded-2xl cursor-pointer transition-all hover:border-orange-500 hover:bg-orange-50/50 group">
+                <iconify-icon icon="lucide:user" class="text-2xl text-slate-400 mr-4 group-hover:text-orange-500 transition-colors"></iconify-icon>
+                <div class="flex-1">
+                  <p class="font-bold text-slate-900 group-hover:text-black">Self-Employed / Sole Trader</p>
+                  <p class="text-xs text-slate-500">Managing your own business</p>
                 </div>
-                <div class="absolute top-4 right-4 text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <iconify-icon icon="lucide:arrow-right" class="text-2xl"></iconify-icon>
-                </div>
+                <iconify-icon icon="lucide:chevron-right" class="text-slate-300 group-hover:text-orange-500 transition-all transform group-hover:translate-x-1"></iconify-icon>
               </a>
             </div>
           </div>
@@ -101,6 +89,5 @@
       </section>
     </main>
   </div>
-  <script src="wageguard.js" defer></script>
 </body>
 </html>

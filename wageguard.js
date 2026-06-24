@@ -148,12 +148,19 @@
     console.log('Zapier payload:', payload);
 
     try {
+      // Use URL-encoded form submission to avoid CORS preflight
+      const formBody = new URLSearchParams();
+      for (const k in payload) {
+        if (Object.prototype.hasOwnProperty.call(payload, k)) {
+          formBody.append(k, String(payload[k]));
+        }
+      }
       const response = await fetch(zapierWebhook, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: JSON.stringify(payload)
+        body: formBody.toString()
       });
       const text = await response.text();
       console.log('Zapier response status:', response.status);

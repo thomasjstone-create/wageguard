@@ -145,6 +145,7 @@
     saveFormData(payload);
     payload.submittedAt = new Date().toISOString();
     updateFinalStatus('Sending your quote details…', 'info');
+    console.log('Zapier payload:', payload);
 
     try {
       const response = await fetch(zapierWebhook, {
@@ -154,8 +155,10 @@
         },
         body: JSON.stringify(payload)
       });
+      const text = await response.text();
+      console.log('Zapier response status:', response.status);
+      console.log('Zapier response body:', text);
       if (!response.ok) {
-        const text = await response.text();
         throw new Error(text || 'Webhook submission failed');
       }
       updateFinalStatus('Your details are sent. Redirecting…', 'success');
@@ -164,6 +167,7 @@
         window.location.href = formSuccessRedirect;
       }, 1200);
     } catch (error) {
+      console.error('Zapier submit error:', error);
       updateFinalStatus('Unable to send data at the moment. Please try again or email help@wageguard.co.uk.', 'error');
     }
   }

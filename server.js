@@ -1,3 +1,4 @@
+require('dotenv').config();
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -21,6 +22,12 @@ const client = twilio(accountSid, authToken);
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname)));
+
+// Ensure API routes always return JSON errors
+app.use('/api', (req, res, next) => {
+  res.setHeader('Content-Type', 'application/json');
+  next();
+});
 
 const otpStore = new Map();
 
@@ -67,6 +74,11 @@ app.post('/api/verify-otp', (req, res) => {
 
   otpStore.delete(phone);
   return res.json({ success: true });
+});
+// Generic JSON error handler for API
+app.use('/api', (err, req, res, next) => {
+  console.error('API error:', err);
+  res.status(500).json({ error: 'Internal server error' });
 });
 
 app.listen(port, () => {

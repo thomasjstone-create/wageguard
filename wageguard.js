@@ -81,6 +81,15 @@
     status.className = `text-sm ${type === 'success' ? 'text-emerald-600' : type === 'error' ? 'text-rose-600' : 'text-slate-500'}`;
   }
 
+  async function readResponseBody(response) {
+    const text = await response.text();
+    try {
+      return { ok: true, data: text ? JSON.parse(text) : {}, rawText: text };
+    } catch (error) {
+      return { ok: false, data: null, rawText: text };
+    }
+  }
+
   function renderOtpState() {
     const data = getSavedData();
     const otpPanel = document.getElementById('otp-verification-panel');
@@ -320,19 +329,16 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone })
               });
-              let result;
-              try {
-                result = await response.json();
-              } catch (parseErr) {
-                const text = await response.text();
-                throw new Error(`Server response (${response.status}): ${text}`);
-              }
+              const body = await readResponseBody(response);
+              const result = body.data || {};
               if (!response.ok) {
-                throw new Error(result.error || `Unable to send verification code (status ${response.status})`);
+                const message = result.error || body.rawText || `Unable to send verification code (status ${response.status})`;
+                throw new Error(message);
               }
               saveFormData({ phoneVerified: false, otpSent: true });
-              setOtpStatus('Verification code sent. Enter it below to verify your phone.', 'success');
+              setOtpStatus('Verification code sent. You can request another one anytime.', 'success');
               if (otpInput) otpInput.value = '';
+              if (sendOtpButton) sendOtpButton.textContent = 'Resend code';
               renderOtpState();
             } catch (error) {
               setOtpStatus(error.message || 'Unable to send verification code. Try again later.', 'error');
@@ -355,9 +361,10 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone, code })
               });
-              const result = await response.json();
+              const body = await readResponseBody(response);
+              const result = body.data || {};
               if (!response.ok) {
-                throw new Error(result.error || 'Verification failed');
+                throw new Error(result.error || body.rawText || 'Verification failed');
               }
               saveFormData({ phoneVerified: true, otpSent: false });
               setOtpStatus('Phone verified successfully.', 'success');

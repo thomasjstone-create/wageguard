@@ -107,7 +107,7 @@
       </div>
 
       <!-- Date of Birth Selection -->
-      <div class="mt-10 space-y-6">
+      <div id="dob-form-section" class="mt-10 space-y-6">
         <div class="grid grid-cols-3 gap-3">
           <!-- Day -->
           <div class="relative">
@@ -146,6 +146,13 @@
           Continue
           <iconify-icon icon="lucide:arrow-right"></iconify-icon>
         </a>
+      </div>
+      <div id="age-decline-screen" class="hidden p-6 mt-8 rounded-3xl bg-white border border-rose-200 shadow-lg text-center">
+        <div class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-rose-100 mx-auto mb-6">
+          <iconify-icon icon="lucide:slash" class="text-2xl text-rose-600"></iconify-icon>
+        </div>
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">Sorry, we cannot offer cover</h2>
+        <p class="text-slate-600 leading-7">Based on your date of birth, you are not eligible for our income protection quote service at this time.</p>
       </div>
     </main>
 

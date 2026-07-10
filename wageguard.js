@@ -74,6 +74,45 @@
     localStorage.setItem(storageKey, JSON.stringify(Object.assign({}, current, partialData)));
   }
 
+  function generateOtp() {
+    return String(Math.floor(Math.random() * 9000) + 1000);
+  }
+
+  function setOtpStatus(message, type = 'info') {
+    const status = document.getElementById('otp-status');
+    if (!status) return;
+    status.textContent = message;
+    status.className = `text-sm ${type === 'success' ? 'text-emerald-600' : type === 'error' ? 'text-rose-600' : 'text-slate-500'}`;
+  }
+
+  function renderOtpState() {
+    const data = getSavedData();
+    const otpPanel = document.getElementById('otp-verification-panel');
+    const badge = document.getElementById('phone-verified-badge');
+    const finishButton = document.getElementById('nav-finish-quote');
+
+    const verified = data.phoneVerified === true;
+    if (otpPanel) {
+      otpPanel.classList.toggle('hidden', verified);
+    }
+    if (badge) {
+      badge.classList.toggle('hidden', !verified);
+    }
+    if (finishButton) {
+      finishButton.disabled = !verified;
+      finishButton.classList.toggle('opacity-50', !verified);
+      finishButton.classList.toggle('cursor-not-allowed', !verified);
+    }
+
+    if (verified) {
+      setOtpStatus('Phone verified. Continue to submit your quote.', 'success');
+    } else if (data.phoneOtp) {
+      setOtpStatus('Enter the 4-digit code sent to your phone.');
+    } else {
+      setOtpStatus('Tap Send code to receive a 4-digit verification code.');
+    }
+  }
+
   function setChoiceLink(id, field, value, nextPage) {
     const element = document.getElementById(id);
     if (!element) return;
@@ -111,10 +150,23 @@
   async function submitFinalForm(event) {
     event.preventDefault();
     const data = getSavedData();
-    const fields = ['firstName', 'lastName', 'email', 'phone'];
-    const payload = Object.assign({}, data);
+    const payload = {
+      employmentStatus: data.employmentStatus || '',
+      coverAmount: data.coverAmount || '',
+      smokingStatus: data.smokingStatus || '',
+      healthHistory: data.healthHistory || '',
+      dateOfBirth: data.dateOfBirth || '',
+      birthDay: data.birthDay || '',
+      birthMonth: data.birthMonth || '',
+      birthYear: data.birthYear || '',
+      firstName: data.firstName || '',
+      lastName: data.lastName || '',
+      email: data.email || '',
+      phone: data.phone || ''
+    };
 
-    for (const field of fields) {
+    const requiredFields = ['firstName', 'lastName', 'email', 'phone'];
+    for (const field of requiredFields) {
       const input = document.querySelector(`input[name="${field}"]`);
       if (input) {
         const value = input.value.trim();
@@ -125,6 +177,12 @@
         }
         payload[field] = value;
       }
+    }
+
+    const savedData = getSavedData();
+    if (savedData.phoneVerified !== true) {
+      updateFinalStatus('Please verify your phone number with the 4-digit code before submitting.', 'error');
+      return;
     }
 
     const dobDay = document.querySelector('select[name="dobDay"]');
@@ -139,7 +197,10 @@
         return;
       }
       payload.dateOfBirth = `${day}/${month}/${year}`;
-      saveFormData({ dateOfBirth: payload.dateOfBirth });
+      payload.birthDay = day;
+      payload.birthMonth = month;
+      payload.birthYear = year;
+      saveFormData({ dateOfBirth: payload.dateOfBirth, birthDay: day, birthMonth: month, birthYear: year });
     }
 
     saveFormData(payload);
@@ -148,19 +209,12 @@
     console.log('Zapier payload:', payload);
 
     try {
-      // Use URL-encoded form submission to avoid CORS preflight
-      const formBody = new URLSearchParams();
-      for (const k in payload) {
-        if (Object.prototype.hasOwnProperty.call(payload, k)) {
-          formBody.append(k, String(payload[k]));
-        }
-      }
       const response = await fetch(zapierWebhook, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded'
+          'Content-Type': 'application/json'
         },
-        body: formBody.toString()
+        body: JSON.stringify(payload)
       });
       const text = await response.text();
       console.log('Zapier response status:', response.status);
@@ -215,7 +269,21 @@
             alert('Please select your day, month and year of birth.');
             return;
           }
+          const birthDate = new Date(Number(year), Number(month) - 1, Number(day));
+          const today = new Date();
+          let age = today.getFullYear() - birthDate.getFullYear();
+          const monthDiff = today.getMonth() - birthDate.getMonth();
+          if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+          }
           saveFormData({ dateOfBirth: `${day}/${month}/${year}`, birthDay: day, birthMonth: month, birthYear: year });
+          if (age >= 60) {
+            const formSection = document.getElementById('dob-form-section');
+            const declineSection = document.getElementById('age-decline-screen');
+            if (formSection) formSection.classList.add('hidden');
+            if (declineSection) declineSection.classList.remove('hidden');
+            return;
+          }
           window.location.href = '06-wage-guard-fixed-brand-logo-consistency.html';
         });
         break;
@@ -223,15 +291,69 @@
       case '06-wage-guard-fixed-brand-logo-consistency.html': {
         restoreFinalPageValues();
         const finishButton = document.getElementById('nav-finish-quote');
+        const phoneInput = document.querySelector('input[name="phone"]');
+        const sendOtpButton = document.getElementById('send-otp-button');
+        const verifyOtpButton = document.getElementById('verify-otp-button');
+        const otpInput = document.getElementById('phone-otp');
+
         if (finishButton) {
           finishButton.addEventListener('click', submitFinalForm);
         }
+
+        if (phoneInput) {
+          phoneInput.addEventListener('input', () => {
+            const data = getSavedData();
+            if (data.phoneVerified === true) {
+              saveFormData({ phoneVerified: false, phoneOtp: '' });
+              renderOtpState();
+            }
+          });
+        }
+
+        if (sendOtpButton) {
+          sendOtpButton.addEventListener('click', () => {
+            const phone = phoneInput?.value.trim() || '';
+            if (!phone) {
+              setOtpStatus('Please enter your phone number first.', 'error');
+              if (phoneInput) phoneInput.focus();
+              return;
+            }
+            const otp = generateOtp();
+            saveFormData({ phoneOtp: otp, phoneVerified: false });
+            console.log(`Phone verification code for ${phone}: ${otp}`);
+            setOtpStatus('A 4-digit code has been generated and sent to your phone. Enter it below to verify.');
+            if (otpInput) otpInput.value = '';
+            renderOtpState();
+          });
+        }
+
+        if (verifyOtpButton) {
+          verifyOtpButton.addEventListener('click', () => {
+            const code = otpInput?.value.trim() || '';
+            const data = getSavedData();
+            if (code.length !== 4 || !/^[0-9]{4}$/.test(code)) {
+              setOtpStatus('Enter the 4-digit code exactly as shown.', 'error');
+              if (otpInput) otpInput.focus();
+              return;
+            }
+            if (code !== (data.phoneOtp || '')) {
+              setOtpStatus('That code is incorrect. Please try again.', 'error');
+              return;
+            }
+            saveFormData({ phoneVerified: true, phoneOtp: '' });
+            setOtpStatus('Phone verified successfully.', 'success');
+            renderOtpState();
+          });
+        }
+
         const inputs = document.querySelectorAll('input[name]');
         inputs.forEach(input => {
           input.addEventListener('input', event => {
             saveFormData({ [event.target.name]: event.target.value });
           });
         });
+
+        renderOtpState();
         break;
       }
       default:

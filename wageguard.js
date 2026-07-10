@@ -74,10 +74,6 @@
     localStorage.setItem(storageKey, JSON.stringify(Object.assign({}, current, partialData)));
   }
 
-  function generateOtp() {
-    return String(Math.floor(Math.random() * 9000) + 1000);
-  }
-
   function setOtpStatus(message, type = 'info') {
     const status = document.getElementById('otp-status');
     if (!status) return;
@@ -106,7 +102,7 @@
 
     if (verified) {
       setOtpStatus('Phone verified. Continue to submit your quote.', 'success');
-    } else if (data.phoneOtp) {
+    } else if (data.otpSent) {
       setOtpStatus('Enter the 4-digit code sent to your phone.');
     } else {
       setOtpStatus('Tap Send code to receive a 4-digit verification code.');
@@ -304,45 +300,65 @@
           phoneInput.addEventListener('input', () => {
             const data = getSavedData();
             if (data.phoneVerified === true) {
-              saveFormData({ phoneVerified: false, phoneOtp: '' });
+              saveFormData({ phoneVerified: false, otpSent: false });
               renderOtpState();
             }
           });
         }
 
         if (sendOtpButton) {
-          sendOtpButton.addEventListener('click', () => {
+          sendOtpButton.addEventListener('click', async () => {
             const phone = phoneInput?.value.trim() || '';
             if (!phone) {
               setOtpStatus('Please enter your phone number first.', 'error');
               if (phoneInput) phoneInput.focus();
               return;
             }
-            const otp = generateOtp();
-            saveFormData({ phoneOtp: otp, phoneVerified: false });
-            console.log(`Phone verification code for ${phone}: ${otp}`);
-            setOtpStatus('A 4-digit code has been generated and sent to your phone. Enter it below to verify.');
-            if (otpInput) otpInput.value = '';
-            renderOtpState();
+            try {
+              const response = await fetch('/api/send-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone })
+              });
+              const result = await response.json();
+              if (!response.ok) {
+                throw new Error(result.error || 'Unable to send verification code');
+              }
+              saveFormData({ phoneVerified: false, otpSent: true });
+              setOtpStatus('Verification code sent. Enter it below to verify your phone.', 'success');
+              if (otpInput) otpInput.value = '';
+              renderOtpState();
+            } catch (error) {
+              setOtpStatus(error.message || 'Unable to send verification code. Try again later.', 'error');
+            }
           });
         }
 
         if (verifyOtpButton) {
-          verifyOtpButton.addEventListener('click', () => {
+          verifyOtpButton.addEventListener('click', async () => {
             const code = otpInput?.value.trim() || '';
-            const data = getSavedData();
+            const phone = phoneInput?.value.trim() || '';
             if (code.length !== 4 || !/^[0-9]{4}$/.test(code)) {
               setOtpStatus('Enter the 4-digit code exactly as shown.', 'error');
               if (otpInput) otpInput.focus();
               return;
             }
-            if (code !== (data.phoneOtp || '')) {
-              setOtpStatus('That code is incorrect. Please try again.', 'error');
-              return;
+            try {
+              const response = await fetch('/api/verify-otp', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone, code })
+              });
+              const result = await response.json();
+              if (!response.ok) {
+                throw new Error(result.error || 'Verification failed');
+              }
+              saveFormData({ phoneVerified: true, otpSent: false });
+              setOtpStatus('Phone verified successfully.', 'success');
+              renderOtpState();
+            } catch (error) {
+              setOtpStatus(error.message || 'Verification failed. Please try again.', 'error');
             }
-            saveFormData({ phoneVerified: true, phoneOtp: '' });
-            setOtpStatus('Phone verified successfully.', 'success');
-            renderOtpState();
           });
         }
 

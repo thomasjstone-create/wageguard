@@ -320,9 +320,15 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone })
               });
-              const result = await response.json();
+              let result;
+              try {
+                result = await response.json();
+              } catch (parseErr) {
+                const text = await response.text();
+                throw new Error(`Server response (${response.status}): ${text}`);
+              }
               if (!response.ok) {
-                throw new Error(result.error || 'Unable to send verification code');
+                throw new Error(result.error || `Unable to send verification code (status ${response.status})`);
               }
               saveFormData({ phoneVerified: false, otpSent: true });
               setOtpStatus('Verification code sent. Enter it below to verify your phone.', 'success');

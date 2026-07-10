@@ -3,21 +3,21 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const twilio = require('twilio');
+const { BirdClient } = require('@messagebird/sdk');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const messagingServiceSid = process.env.TWILIO_MESSAGING_SERVICE_SID;
+const messagebirdKey = process.env.MESSAGEBIRD_API_KEY;
 
-if (!accountSid || !authToken || !messagingServiceSid) {
-  console.error('Missing Twilio environment variables. Please set TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, and TWILIO_MESSAGING_SERVICE_SID.');
+if (!messagebirdKey) {
+  console.error('Missing MESSAGEBIRD_API_KEY environment variable.');
   process.exit(1);
 }
 
-const client = twilio(accountSid, authToken);
+const bird = new BirdClient({ apiKey: messagebirdKey });
+console.log('Using MessageBird SDK for SMS OTP');
+
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -45,14 +45,20 @@ app.post('/api/send-otp', async (req, res) => {
   otpStore.set(phone, otp);
 
   try {
-    await client.messages.create({
+    await bird.sms.send({
       to: phone,
-      messagingServiceSid,
-      body: `Your verification code is ${otp}`
+      template: {
+        name: 'bird_otp_verification',
+        parameters: {
+          code: otp
+        }
+      }
     });
+
+    console.log(`OTP sent to ${phone}`);
     return res.json({ success: true });
   } catch (error) {
-    console.error('Twilio send-otp error:', error);
+    console.error('MessageBird send-otp error:', error);
     otpStore.delete(phone);
     return res.status(500).json({ error: 'Unable to send verification code' });
   }
@@ -82,5 +88,5 @@ app.use('/api', (err, req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log(`Twilio OTP server listening on port ${port}`);
+  console.log(`MessageBird OTP server listening on port ${port}`);
 });

@@ -74,50 +74,6 @@
     localStorage.setItem(storageKey, JSON.stringify(Object.assign({}, current, partialData)));
   }
 
-  function setOtpStatus(message, type = 'info') {
-    const status = document.getElementById('otp-status');
-    if (!status) return;
-    status.textContent = message;
-    status.className = `text-sm ${type === 'success' ? 'text-emerald-600' : type === 'error' ? 'text-rose-600' : 'text-slate-500'}`;
-  }
-
-  async function readResponseBody(response) {
-    const text = await response.text();
-    try {
-      return { ok: true, data: text ? JSON.parse(text) : {}, rawText: text };
-    } catch (error) {
-      return { ok: false, data: null, rawText: text };
-    }
-  }
-
-  function renderOtpState() {
-    const data = getSavedData();
-    const otpPanel = document.getElementById('otp-verification-panel');
-    const badge = document.getElementById('phone-verified-badge');
-    const finishButton = document.getElementById('nav-finish-quote');
-
-    const verified = data.phoneVerified === true;
-    if (otpPanel) {
-      otpPanel.classList.toggle('hidden', verified);
-    }
-    if (badge) {
-      badge.classList.toggle('hidden', !verified);
-    }
-    if (finishButton) {
-      finishButton.disabled = !verified;
-      finishButton.classList.toggle('opacity-50', !verified);
-      finishButton.classList.toggle('cursor-not-allowed', !verified);
-    }
-
-    if (verified) {
-      setOtpStatus('Phone verified. Continue to submit your quote.', 'success');
-    } else if (data.otpSent) {
-      setOtpStatus('Enter the 4-digit code sent to your phone.');
-    } else {
-      setOtpStatus('Tap Send code to receive a 4-digit verification code.');
-    }
-  }
-
   function setChoiceLink(id, field, value, nextPage) {
     const element = document.getElementById(id);
     if (!element) return;
@@ -184,12 +140,6 @@
       }
     }
 
-    const savedData = getSavedData();
-    if (savedData.phoneVerified !== true) {
-      updateFinalStatus('Please verify your phone number with the 4-digit code before submitting.', 'error');
-      return;
-    }
-
     const dobDay = document.querySelector('select[name="dobDay"]');
     const dobMonth = document.querySelector('select[name="dobMonth"]');
     const dobYear = document.querySelector('select[name="dobYear"]');
@@ -216,17 +166,10 @@
     try {
       const response = await fetch(zapierWebhook, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
+        body: new URLSearchParams(payload),
+        mode: 'no-cors'
       });
-      const text = await response.text();
-      console.log('Zapier response status:', response.status);
-      console.log('Zapier response body:', text);
-      if (!response.ok) {
-        throw new Error(text || 'Webhook submission failed');
-      }
+      console.log('Zapier response type:', response.type);
       updateFinalStatus('Your details are sent. Redirecting…', 'success');
       localStorage.removeItem(storageKey);
       setTimeout(() => {
@@ -296,83 +239,9 @@
       case '06-wage-guard-fixed-brand-logo-consistency.html': {
         restoreFinalPageValues();
         const finishButton = document.getElementById('nav-finish-quote');
-        const phoneInput = document.querySelector('input[name="phone"]');
-        const sendOtpButton = document.getElementById('send-otp-button');
-        const verifyOtpButton = document.getElementById('verify-otp-button');
-        const otpInput = document.getElementById('phone-otp');
 
         if (finishButton) {
           finishButton.addEventListener('click', submitFinalForm);
-        }
-
-        if (phoneInput) {
-          phoneInput.addEventListener('input', () => {
-            const data = getSavedData();
-            if (data.phoneVerified === true) {
-              saveFormData({ phoneVerified: false, otpSent: false });
-              renderOtpState();
-            }
-          });
-        }
-
-        if (sendOtpButton) {
-          sendOtpButton.addEventListener('click', async () => {
-            const phone = phoneInput?.value.trim() || '';
-            if (!phone) {
-              setOtpStatus('Please enter your phone number first.', 'error');
-              if (phoneInput) phoneInput.focus();
-              return;
-            }
-            try {
-              const response = await fetch('/api/send-otp', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phone })
-              });
-              const body = await readResponseBody(response);
-              const result = body.data || {};
-              if (!response.ok) {
-                const message = result.error || body.rawText || `Unable to send verification code (status ${response.status})`;
-                throw new Error(message);
-              }
-              saveFormData({ phoneVerified: false, otpSent: true });
-              setOtpStatus('Verification code sent. You can request another one anytime.', 'success');
-              if (otpInput) otpInput.value = '';
-              if (sendOtpButton) sendOtpButton.textContent = 'Resend code';
-              renderOtpState();
-            } catch (error) {
-              setOtpStatus(error.message || 'Unable to send verification code. Try again later.', 'error');
-            }
-          });
-        }
-
-        if (verifyOtpButton) {
-          verifyOtpButton.addEventListener('click', async () => {
-            const code = otpInput?.value.trim() || '';
-            const phone = phoneInput?.value.trim() || '';
-            if (code.length !== 4 || !/^[0-9]{4}$/.test(code)) {
-              setOtpStatus('Enter the 4-digit code exactly as shown.', 'error');
-              if (otpInput) otpInput.focus();
-              return;
-            }
-            try {
-              const response = await fetch('/api/verify-otp', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ phone, code })
-              });
-              const body = await readResponseBody(response);
-              const result = body.data || {};
-              if (!response.ok) {
-                throw new Error(result.error || body.rawText || 'Verification failed');
-              }
-              saveFormData({ phoneVerified: true, otpSent: false });
-              setOtpStatus('Phone verified successfully.', 'success');
-              renderOtpState();
-            } catch (error) {
-              setOtpStatus(error.message || 'Verification failed. Please try again.', 'error');
-            }
-          });
         }
 
         const inputs = document.querySelectorAll('input[name]');
@@ -381,8 +250,6 @@
             saveFormData({ [event.target.name]: event.target.value });
           });
         });
-
-        renderOtpState();
         break;
       }
       default:

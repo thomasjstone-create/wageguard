@@ -1,92 +1,40 @@
 require('dotenv').config();
+const fs = require('fs');
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const { BirdClient } = require('@messagebird/sdk');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const messagebirdKey = process.env.MESSAGEBIRD_API_KEY;
-
-if (!messagebirdKey) {
-  console.error('Missing MESSAGEBIRD_API_KEY environment variable.');
-  process.exit(1);
-}
-
-const bird = new BirdClient({ apiKey: messagebirdKey });
-console.log('Using MessageBird SDK for SMS OTP');
-
-
 app.use(cors());
 app.use(bodyParser.json());
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get(/^\/[^.]+$/, (req, res, next) => {
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+
+  const routePath = req.path.replace(/^\/+/, '').replace(/\/+$/, '');
+  if (!routePath) {
+    return res.sendFile(path.join(__dirname, 'index.html'));
+  }
+
+  const candidatePath = path.join(__dirname, `${routePath}.html`);
+  if (fs.existsSync(candidatePath)) {
+    return res.sendFile(candidatePath);
+  }
+
+  return next();
+});
+
 app.use(express.static(path.join(__dirname)));
 
-// Ensure API routes always return JSON errors
-app.use('/api', (req, res, next) => {
-  res.setHeader('Content-Type', 'application/json');
-  next();
-});
-
-const otpStore = new Map();
-
-function generateOtp() {
-  return String(Math.floor(Math.random() * 9000) + 1000);
-}
-
-app.post('/api/send-otp', async (req, res) => {
-  const { phone } = req.body;
-  if (!phone || typeof phone !== 'string') {
-    return res.status(400).json({ error: 'Phone number is required' });
-  }
-
-  const otp = generateOtp();
-  otpStore.set(phone, otp);
-
-  try {
-    await bird.sms.send({
-      to: phone,
-      template: {
-        name: 'bird_otp_verification',
-        parameters: {
-          code: otp
-        }
-      }
-    });
-
-    console.log(`OTP sent to ${phone}`);
-    return res.json({ success: true });
-  } catch (error) {
-    console.error('MessageBird send-otp error:', error);
-    otpStore.delete(phone);
-    return res.status(500).json({ error: 'Unable to send verification code' });
-  }
-});
-
-app.post('/api/verify-otp', (req, res) => {
-  const { phone, code } = req.body;
-  if (!phone || !code || typeof phone !== 'string' || typeof code !== 'string') {
-    return res.status(400).json({ error: 'Phone and code are required' });
-  }
-
-  const storedOtp = otpStore.get(phone);
-  if (!storedOtp) {
-    return res.status(400).json({ error: 'No verification code was sent for this number' });
-  }
-  if (storedOtp !== code) {
-    return res.status(400).json({ error: 'Invalid verification code' });
-  }
-
-  otpStore.delete(phone);
-  return res.json({ success: true });
-});
-// Generic JSON error handler for API
-app.use('/api', (err, req, res, next) => {
-  console.error('API error:', err);
-  res.status(500).json({ error: 'Internal server error' });
-});
-
 app.listen(port, () => {
-  console.log(`MessageBird OTP server listening on port ${port}`);
+  console.log(`Wage Guard server listening on port ${port}`);
 });

@@ -141,24 +141,6 @@
           </div>
         </div>
 
-        <div id="otp-verification-panel" class="hidden space-y-4 mt-4 p-4 bg-white border border-slate-200 rounded-3xl shadow-sm">
-          <div class="flex items-center justify-between gap-3">
-            <div>
-              <p class="text-sm font-bold text-slate-900">Phone verification</p>
-              <p id="otp-status" class="text-sm text-slate-500">Tap Send code to receive a 4-digit verification code.</p>
-            </div>
-            <button id="send-otp-button" type="button" class="h-11 px-4 rounded-2xl bg-orange-500 text-white font-bold hover:bg-orange-400 transition">Send code</button>
-          </div>
-          <div class="grid grid-cols-[1fr_auto] gap-3">
-            <input id="phone-otp" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="Enter 4-digit code" class="w-full h-14 pl-4 pr-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none text-slate-900">
-            <button id="verify-otp-button" type="button" class="h-14 rounded-2xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition">Verify</button>
-          </div>
-        </div>
-
-        <div id="phone-verified-badge" class="hidden mt-4 inline-flex items-center gap-2 rounded-2xl bg-emerald-50 border border-emerald-200 px-4 py-3 text-sm font-semibold text-emerald-700">
-          <iconify-icon icon="lucide:check-circle" class="text-xl"></iconify-icon>
-          Phone verified
-        </div>
       </div>
 
       <!-- Reassurance Section -->
